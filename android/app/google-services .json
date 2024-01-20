@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "969961199216",
+    "project_id": "userauthentication-854d8",
+    "storage_bucket": "userauthentication-854d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969961199216:android:e52087e015cf49e57a86b5",
+        "android_client_info": {
+          "package_name": "rohan.app.login"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjxxCHFqj4jTYEXXkVcXrBkBO3-udkZww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBxmINrx80PeOCD79tm7r5Rme_0vhhm4to</string>
+	<key>GCM_SENDER_ID</key>
+	<string>969961199216</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>rohan.app.login</string>
+	<key>PROJECT_ID</key>
+	<string>userauthentication-854d8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>userauthentication-854d8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:969961199216:ios:f8d35d0fd68967db7a86b5</string>
+</dict>
+</plist>
