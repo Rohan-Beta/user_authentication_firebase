@@ -1,6 +1,9 @@
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:login/provider/sign_in_provider.dart";
+import "package:login/screens/splass_screen.dart";
+import "package:provider/provider.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +23,7 @@ void main() async {
     await Firebase.initializeApp();
   }
 
-  runApp(UserLogin());
+  runApp(const UserLogin());
 }
 
 class UserLogin extends StatelessWidget {
@@ -28,17 +31,16 @@ class UserLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "User Authentication",
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          body: SizedBox(
-            height: 50,
-            child: AppBar(
-              title: const Center(child: Text("User Authentication")),
-              backgroundColor: Colors.lightBlue,
-            ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SignInProvider()),
+      ],
+      child: const MaterialApp(
+        title: "User Authentication",
+        debugShowCheckedModeBanner: false,
+        home: SafeArea(
+          child: Scaffold(
+            body: MySplashScreen(),
           ),
         ),
       ),
