@@ -1,6 +1,7 @@
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:login/provider/internet_provider.dart";
 import "package:login/provider/sign_in_provider.dart";
 import "package:login/screens/splass_screen.dart";
 import "package:provider/provider.dart";
@@ -33,7 +34,12 @@ class UserLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => SignInProvider()),
+        ChangeNotifierProvider(
+          create: (context) => SignInProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => InternetProvider(),
+        ),
       ],
       child: const MaterialApp(
         title: "User Authentication",

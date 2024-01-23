@@ -1,6 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:login/provider/internet_provider.dart';
+import 'package:login/provider/sign_in_provider.dart';
 import 'package:login/utilss/screen_size.dart';
+import 'package:login/utilss/snack_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -60,6 +66,9 @@ class _LogInScreenState extends State<LogInScreen> {
                   ],
                 ),
               ),
+              // rounded loading button
+
+              // google
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +76,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   RoundedLoadingButton(
                     controller: googleController,
                     successColor: Colors.red,
-                    color: Colors.red[400],
+                    color: Colors.red[600],
                     width: screenSize.width * 0.80,
                     child: const Wrap(
                       children: [
@@ -88,11 +97,15 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      handleGoogleSignIn();
+                    },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
+
+                  // facebook
                   RoundedLoadingButton(
                     controller: facebookController,
                     successColor: Colors.blue,
@@ -126,5 +139,33 @@ class _LogInScreenState extends State<LogInScreen> {
         ),
       ),
     );
+  }
+  // handling google sign in
+
+  Future handleGoogleSignIn() async {
+    final sp = context.read<SignInProvider>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      openSnackBar(context, "check your Internet Connection", Colors.red);
+      googleController.reset();
+    } else {
+      await sp.signInWithGoogle().then((value) {
+        if (sp.hasError == true) {
+          openSnackBar(context, sp.errorCode.toString(), Colors.red);
+          googleController.reset();
+        } else {
+          // check whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+            } else {
+              // user does not exists
+            }
+          });
+        }
+      });
+    }
   }
 }
