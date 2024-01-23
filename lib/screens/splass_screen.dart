@@ -2,12 +2,10 @@
 
 import 'dart:async';
 
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:login/provider/sign_in_provider.dart';
 import 'package:login/screens/HomeScreen.dart';
 import 'package:login/screens/login_screen.dart';
-import 'package:login/utilss/screen_size.dart';
 import 'package:provider/provider.dart';
 
 class MySplashScreen extends StatefulWidget {
