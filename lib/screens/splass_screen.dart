@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:login/provider/sign_in_provider.dart';
 import 'package:login/screens/HomeScreen.dart';
 import 'package:login/screens/login_screen.dart';
+import 'package:login/utilss/next_screen.dart';
 import 'package:provider/provider.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -23,10 +24,8 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
     Timer(const Duration(seconds: 2), () {
       sp.isSignedIn == false
-          ? Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const LogInScreen()))
-          : Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const MyHomeScreen()));
+          ? nextScreenReplace(context, const LogInScreen())
+          : nextScreenReplace(context, const MyHomeScreen());
     });
   }
 

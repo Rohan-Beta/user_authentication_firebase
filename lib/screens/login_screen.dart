@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:login/provider/internet_provider.dart';
 import 'package:login/provider/sign_in_provider.dart';
+import 'package:login/screens/HomeScreen.dart';
+import 'package:login/utilss/next_screen.dart';
 import 'package:login/utilss/screen_size.dart';
 import 'package:login/utilss/snack_bar.dart';
 import 'package:provider/provider.dart';
@@ -160,12 +162,34 @@ class _LogInScreenState extends State<LogInScreen> {
           sp.checkUserExists().then((value) async {
             if (value == true) {
               // user exists
+
+              await sp
+                  .getUserDataFromFireStore(sp.uid)
+                  .then((value) => sp.saveDataToSharedPreferences())
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      }));
             } else {
               // user does not exists
+
+              sp.saveDataToFireStore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
             }
           });
         }
       });
     }
+  }
+
+  // handle after sign
+  handleAfterSignIn() {
+    Future.delayed(const Duration(milliseconds: 1000)).then((value) {
+      nextScreenReplace(context, const MyHomeScreen());
+    });
   }
 }

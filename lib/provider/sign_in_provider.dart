@@ -1,6 +1,4 @@
-// ignore_for_file: prefer_final_fields, avoid_web_libraries_in_flutter
-
-import 'dart:html';
+// ignore_for_file: prefer_final_fields, avoid_web_libraries_in_flutter, avoid_print, await_only_futures
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,8 +47,17 @@ class SignInProvider extends ChangeNotifier {
   }
 
   Future checkSignInUser() async {
-    final SharedPreferences sp = await SharedPreferences.getInstance();
-    _isSignedIn = sp.getBool("signed_in") ?? false;
+    final SharedPreferences s = await SharedPreferences.getInstance();
+    _isSignedIn = s.getBool("signed_in") ?? false;
+    notifyListeners();
+  }
+
+  // user successfully sign in
+
+  Future setSignIn() async {
+    final SharedPreferences s = await SharedPreferences.getInstance();
+    s.setBool("signed_in", true);
+    _isSignedIn = true;
     notifyListeners();
   }
 
@@ -112,6 +119,51 @@ class SignInProvider extends ChangeNotifier {
     }
   }
 
+  // entry for CloudFirestore
+  // if the user already exists
+
+  Future getUserDataFromFireStore(uid) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot snapshot) => {
+              _uid = snapshot["uid"],
+              _name = snapshot["name"],
+              _email = snapshot["email"],
+              _imageUrl = snapshot["imageUrl"],
+              _provider = snapshot["provoder"],
+            });
+  }
+
+  // entry for CloudFirestore
+  // if the user does not exists
+
+  Future saveDataToFireStore() async {
+    final DocumentReference reference =
+        FirebaseFirestore.instance.collection("users").doc(uid);
+
+    await reference.set({
+      "uid": _uid,
+      "name": _name,
+      "email": _email,
+      "imageUrl": _imageUrl,
+      "privider": _provider,
+    });
+    notifyListeners();
+  }
+
+  Future saveDataToSharedPreferences() async {
+    final SharedPreferences s = await SharedPreferences.getInstance();
+    await s.setString("uid", _uid!);
+    await s.setString("name", _name!);
+    await s.setString("email", _email!);
+    await s.setString("imageUrl", _imageUrl!);
+    await s.setString("provider", _provider!);
+
+    notifyListeners();
+  }
+
   // check user exists or not in CloudFirestore
 
   Future<bool> checkUserExists() async {
@@ -143,7 +195,7 @@ class SignInProvider extends ChangeNotifier {
 // clear all data of the user
 
   Future clearStorageData() async {
-    final SharedPreferences sp = await SharedPreferences.getInstance();
-    sp.clear();
+    final SharedPreferences s = await SharedPreferences.getInstance();
+    s.clear();
   }
 }
