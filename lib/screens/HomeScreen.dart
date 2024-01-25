@@ -73,7 +73,7 @@ class _UserAuthState extends State<MyHomeScreen> {
                 style: const TextStyle(color: Colors.red),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.indigo),
