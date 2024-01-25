@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, unused_import
+// ignore_for_file: use_build_context_synchronously, unused_import, file_names
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -3,8 +3,6 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:login/provider/internet_provider.dart";
 import "package:login/provider/sign_in_provider.dart";
-import "package:login/screens/login_screen.dart";
-import "package:login/screens/phoneAuth_screen.dart";
 import "package:login/screens/splass_screen.dart";
 import "package:provider/provider.dart";
 

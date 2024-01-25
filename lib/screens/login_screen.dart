@@ -20,8 +20,6 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  final GlobalKey _scafoldKey = GlobalKey<ScaffoldState>();
-
   final RoundedLoadingButtonController googleController =
       RoundedLoadingButtonController();
 
