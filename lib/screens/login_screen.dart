@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:login/provider/internet_provider.dart';
 import 'package:login/provider/sign_in_provider.dart';
 import 'package:login/screens/HomeScreen.dart';
+import 'package:login/screens/phoneauth_screen.dart';
 import 'package:login/utilss/next_screen.dart';
 import 'package:login/utilss/screen_size.dart';
 import 'package:login/utilss/snack_bar.dart';
@@ -24,7 +25,7 @@ class _LogInScreenState extends State<LogInScreen> {
   final RoundedLoadingButtonController googleController =
       RoundedLoadingButtonController();
 
-  final RoundedLoadingButtonController facebookController =
+  final RoundedLoadingButtonController phoneController =
       RoundedLoadingButtonController();
 
   Size screenSize = MyScreenSize().getScreenSize();
@@ -77,8 +78,8 @@ class _LogInScreenState extends State<LogInScreen> {
                 children: [
                   RoundedLoadingButton(
                     controller: googleController,
-                    successColor: Colors.red,
-                    color: Colors.red[600],
+                    successColor: Colors.blue,
+                    color: Colors.blue,
                     width: screenSize.width * 0.80,
                     child: const Wrap(
                       children: [
@@ -107,16 +108,16 @@ class _LogInScreenState extends State<LogInScreen> {
                     height: 10,
                   ),
 
-                  // facebook
+                  // phone
                   RoundedLoadingButton(
-                    controller: facebookController,
-                    successColor: Colors.blue,
-                    color: Colors.blue[600],
+                    controller: phoneController,
+                    successColor: Colors.black,
+                    color: Colors.black,
                     width: screenSize.width * 0.80,
                     child: const Wrap(
                       children: [
                         Icon(
-                          FontAwesomeIcons.facebook,
+                          FontAwesomeIcons.phone,
                           size: 20,
                           color: Colors.white,
                         ),
@@ -124,7 +125,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           width: 15,
                         ),
                         Text(
-                          "Sign in with Facebook",
+                          "Sign in with Phone",
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -132,7 +133,10 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      nextScreen(context, const PhoneAuthScreen());
+                      phoneController.reset();
+                    },
                   )
                 ],
               )
@@ -163,13 +167,12 @@ class _LogInScreenState extends State<LogInScreen> {
             if (value == true) {
               // user exists
 
-              await sp
-                  .getUserDataFromFireStore(sp.uid)
-                  .then((value) => sp.saveDataToSharedPreferences())
+              await sp.getUserDataFromFireStore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
                   .then((value) => sp.setSignIn().then((value) {
                         googleController.success();
                         handleAfterSignIn();
-                      }));
+                      })));
             } else {
               // user does not exists
 

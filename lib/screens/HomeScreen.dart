@@ -76,11 +76,12 @@ class _UserAuthState extends State<MyHomeScreen> {
                 height: 20,
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.indigo),
                 child: const Text(
                   "Sign Out",
                   style: TextStyle(
-                      // color: Colors.white,
-                      ),
+                    color: Colors.white,
+                  ),
                 ),
                 onPressed: () {
                   sp.userSignOut();
