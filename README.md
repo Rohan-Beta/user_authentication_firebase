@@ -13,6 +13,7 @@ User authentication using firebase , tools used: google signIn and phone signIn
 2. AppName > andriod > app > build.gradle
 
 plugins {
+
     id 'com.google.gms.google-services'
 }
 
