@@ -52,3 +52,35 @@ dependencies {
 
 1. Paste GoogleService-Info.plistinfo from firestore in directory
 (appName > ios > Runner)
+
+## Firebase
+## In rule part
+
+1. Firestore Database:
+
+
+   rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth!=null;
+    }
+  }
+}
+
+2. Storage:
+   
+
+   rules_version = '2';
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth!=null;
+    }
+  }
+}
