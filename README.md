@@ -52,7 +52,3 @@ dependencies {
 
 1. Paste GoogleService-Info.plistinfo from firestore in directory
 (appName > ios > Runner)
-
-## generate key for SHA1 and SHA256(fingerprint)
-
-keytool -list -v -keystore C:\Users\rohit\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
