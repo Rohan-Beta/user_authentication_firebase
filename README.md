@@ -4,13 +4,51 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+User authentication using firebase , tools used: google signIn and phone signIn
 
-A few resources to get you started if this is your first Flutter project:
+## Steps(For android):
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Add dependencies in .yaml
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. AppName > andriod > app > build.gradle
+
+plugins {
+    id 'com.google.gms.google-services'
+}
+
+
+defaultConfig {
+        applicationId "rohan.app.login"
+        minSdkVersion 21
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.7.1')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+}
+
+* paste google-services.json from firestore in directory
+(AppName > andriod > app)
+
+3. appName > android > build.gradle
+
+dependencies {
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+## Steps(For Ios):
+
+1. Paste GoogleService-Info.plistinfo from firestore in directory
+(appName > ios > Runner)
+
+## generate key for SHA1 and SHA256(fingerprint)
+
+keytool -list -v -keystore C:\Users\rohit\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
