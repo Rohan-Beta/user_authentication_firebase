@@ -28,8 +28,11 @@ defaultConfig {
 
 
 dependencies {
+
     implementation platform('com.google.firebase:firebase-bom:32.7.1')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 }
 
